@@ -2,9 +2,12 @@ FROM node
 
 WORKDIR /app
 
-COPY . /app
+# we should copy package.json first to take advantage of Docker cache
+COPY package.json /app
 
 RUN npm install
+
+COPY . /app
 
 EXPOSE 80
 
