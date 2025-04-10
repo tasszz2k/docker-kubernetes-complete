@@ -1,0 +1,22 @@
+resources:
+- deployment.yaml
+- service.yaml
+  # we don't need to add configmap.yaml because it will be added by configmapGenerator
+
+commonAnnotations:
+  app: mykustom-annotation
+
+namePrefix: kustom-
+
+nameSuffix: -v1
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+labels:
+- includeSelectors: true
+  pairs:
+    app: mywebapp
+
+# Remove this because we will add it in the overlays
+# configMapGenerator:
+# - name: mykustom-configmap
+#   env: config.properties
