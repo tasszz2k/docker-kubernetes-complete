@@ -19,6 +19,12 @@ spec:
           image: tadinh620/kub-first-app:latest
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: second-app-config
+            - secretRef:
+                name: second-app-secret
+
           livenessProbe:
             httpGet:
               path: /
